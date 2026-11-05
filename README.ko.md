@@ -92,7 +92,7 @@ HERDR_PLUGIN_CONTEXT_JSON='{"focused_pane_cwd":"/some/dir"}' bin/resolve-dir.sh
 
 ## 요구 사항
 
-macOS + [Homebrew](https://brew.sh/), 또는 Yazi가 설치된 Linux.
+macOS + [Homebrew](https://brew.sh/), 또는 Yazi가 설치된 Linux. 패인 디렉터리를 읽는 데 [jq](https://jqlang.org/)를 사용한다 (macOS 15+에는 기본 설치됨). jq가 없으면 Yazi는 현재 디렉터리에서 열린다.
 
 ---
 

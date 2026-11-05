@@ -10,13 +10,8 @@ if [ -n "${HERDR_EXPLORER_DIR:-}" ]; then
   exit 0
 fi
 if [ -n "${HERDR_PLUGIN_CONTEXT_JSON:-}" ]; then
-  DIR="$(node -e '
-    try {
-      const ctx = JSON.parse(process.env.HERDR_PLUGIN_CONTEXT_JSON);
-      const dir = ctx.focused_pane_cwd || ctx.workspace_cwd;
-      if (typeof dir === "string" && dir) process.stdout.write(dir);
-    } catch {}
-  ')"
+  DIR="$(jq -r 'first(.focused_pane_cwd, .workspace_cwd | strings | select(length > 0))' \
+    <<<"$HERDR_PLUGIN_CONTEXT_JSON" 2>/dev/null || true)"
   if [ -n "$DIR" ]; then
     printf '%s\n' "$DIR"
     exit 0
